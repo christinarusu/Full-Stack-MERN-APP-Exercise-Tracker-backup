@@ -12,11 +12,12 @@ export const EditExercise = ({exToEdit}) => {
     const [date, setDate] = useState(exToEdit.date);
 
     const navigate = useNavigate()
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const modifyExercise = async () => {
         const modExercise = {name, reps, weight, unit, date}
         const response = await fetch(
-            `/exercises/${exToEdit._id}`,{
+            `${API_URL}/exercises/${exToEdit._id}`,{
                 method: 'PUT',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify(modExercise)
