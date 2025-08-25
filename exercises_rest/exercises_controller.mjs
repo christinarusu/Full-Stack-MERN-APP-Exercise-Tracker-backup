@@ -10,14 +10,13 @@ import * as exercises from './exercises_model.mjs';
 const ERROR_NOT_FOUND = {Error: "Not found"};
 const ERROR_INVALID_REQ= {Error: "Invalid Request"}
 const PORT = process.env.PORT;
+import cors from 'cors';
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
-app.listen(PORT, async () => {
-    await exercises.connect()
-    console.log(`Server listening on port ${PORT}...`);
-});
+exercises.connect().then(() => console.log("✅ Connected to MongoDB")).catch(console.error);
 
 /**
  * 
@@ -149,5 +148,6 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
        return res.status(404).json(ERROR_NOT_FOUND);
     }
     return res.status(204).json(ex_id);
-
 }))
+
+export default app
