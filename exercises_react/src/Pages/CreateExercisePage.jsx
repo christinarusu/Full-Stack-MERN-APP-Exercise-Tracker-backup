@@ -16,13 +16,11 @@ export const CreateExercise = () => {
 
     const addExercise = async () => {
         const newExercise = {name, reps, weight, unit, date}
-        const response = await fetch(
-            `${API_URL}/exercises`,{
-                method: 'POST',
-                headers: {'Content-type': 'application/json'},
-                body: JSON.stringify(newExercise)
-            }
-        );
+        const response = await fetch(`${API_URL}/exercises`, {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify(newExercise),
+        });
         if(response.status === 201){
             alert("Successfully added the exercise")
         }
