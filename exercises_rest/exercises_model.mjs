@@ -6,21 +6,28 @@ import 'dotenv/config';
 
 const EXERCISE_DB_NAME = 'exercise_db';
 
-let connection = undefined;
+import mongoose from 'mongoose';
+import 'dotenv/config';
 
-/**
- * This function connects to the MongoDB server and to the database
- *  'exercise_db' in that server.
- */
-async function connect(){
-    try{
-        connection = await mongoose.connect(process.env.MONGODB_CONNECT_STRING, 
-                {dbName: EXERCISE_DB_NAME});
-        console.log("Successfully connected to MongoDB using Mongoose!");
-    } catch(err){
-        console.log(err);
-        throw Error(`Could not connect to MongoDB ${err.message}`)
-    }
+const EXERCISE_DB_NAME = 'exercise_db';
+
+let isConnected = false; // track connection state
+
+async function connect() {
+  if (isConnected) {
+    // reuse existing DB connection
+    return;
+  }
+  try {
+    await mongoose.connect(process.env.MONGODB_CONNECT_STRING, {
+      dbName: EXERCISE_DB_NAME,
+    });
+    isConnected = true;
+    console.log("✅ Connected to MongoDB");
+  } catch (err) {
+    console.error("❌ Mongo connection error:", err.message);
+    throw err;
+  }
 }
 
 /**
@@ -105,5 +112,6 @@ const delDocId = async(_id) => {
         const delDoc_id = await doc_id.deleteOne();
     }
 }
+
 
 export {connect, createDocu, findDocu, findDocId, updateDoc, delDocId};
