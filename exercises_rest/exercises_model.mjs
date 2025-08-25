@@ -6,9 +6,6 @@ import 'dotenv/config';
 
 const EXERCISE_DB_NAME = 'exercise_db';
 
-import mongoose from 'mongoose';
-import 'dotenv/config';
-
 let isConnected = false; // track connection state
 
 async function connect() {
@@ -113,4 +110,5 @@ const delDocId = async(_id) => {
 
 
 export {connect, createDocu, findDocu, findDocId, updateDoc, delDocId};
+
 
