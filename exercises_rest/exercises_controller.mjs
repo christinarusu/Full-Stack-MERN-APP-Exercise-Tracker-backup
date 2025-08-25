@@ -88,7 +88,6 @@ app.post('/exercises', asyncHandler(async (req, res) => {
         res.status(400).json(ERROR_INVALID_REQ);
     }
     else{
-        await exercises.connect();  // ensure connection
         const exercise = await exercises.createDocu(req.body.name, 
                             req.body.reps, 
                             req.body.weight,
@@ -104,7 +103,6 @@ app.post('/exercises', asyncHandler(async (req, res) => {
  */
 
 app.get('/exercises', asyncHandler(async (req, res) => {
-    await exercises.connect();  // ensure connection
     const getexec = await exercises.findDocu();
     return res.status(200).json(getexec);
 }))
@@ -114,7 +112,6 @@ app.get('/exercises', asyncHandler(async (req, res) => {
  */
 
 app.get('/exercises/:id', asyncHandler(async (req, res) => {
-    await exercises.connect();  // ensure connection
     const ex_id = await exercises.findDocId(req.params.id);
     if(ex_id === null){
        return res.status(404).json(ERROR_NOT_FOUND);
@@ -127,7 +124,6 @@ app.get('/exercises/:id', asyncHandler(async (req, res) => {
  */
 
 app.put('/exercises/:id', asyncHandler(async (req, res) => {
-    await exercises.connect();  // ensure connection
     const ex_id = req.params.id
     const ex_body = req.body
     if(!isValid(req)){
@@ -147,7 +143,6 @@ app.put('/exercises/:id', asyncHandler(async (req, res) => {
  */
 
 app.delete('/exercises/:id', asyncHandler(async (req, res) => {
-    await exercises.connect();  // ensure connection
     const ex_id = await exercises.delDocId(req.params.id);
     if(ex_id === null){
        return res.status(404).json(ERROR_NOT_FOUND);
@@ -156,4 +151,5 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
