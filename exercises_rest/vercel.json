@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "exercises_controller.mjs", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "exercises_controller.mjs" }
+  ]
+}
