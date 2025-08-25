@@ -3,6 +3,8 @@
 import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import ExerciseTable from '../Components/ExerciseTable';
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 
 
@@ -11,7 +13,7 @@ function HomePage({setExercise}) {
     const navigate = useNavigate()
 
     const loadExercises = async () => {
-        const response = await fetch('/exercises')
+        const response = await fetch(`${API_URL}/exercises`)
         const data = await response.json()
         setExercises(data)
     }
@@ -22,7 +24,7 @@ function HomePage({setExercise}) {
 
     const onDelete = async (_id) => {
         const response = await fetch(
-            `/exercises/${_id}`, 
+            `${API_URL}/exercises/${_id}`, 
             { method: 'DELETE' }
         );
         if (response.status === 204) {
