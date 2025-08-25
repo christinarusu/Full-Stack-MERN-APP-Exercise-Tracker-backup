@@ -12,11 +12,12 @@ export const CreateExercise = () => {
     const [date, setDate] = useState('');
 
     const navigate = useNavigate()
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const addExercise = async () => {
         const newExercise = {name, reps, weight, unit, date}
         const response = await fetch(
-            '/exercises',{
+            `${API_URL}/exercises`,{
                 method: 'POST',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify(newExercise)
