@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/exercises/:match*",
-      "destination": "https://full-stack-mern-app-exercise-tracker-backup-p6gsnm8il.vercel.app/exercises/:match*"
+      "destination": "https://full-stack-mern-app-exercise-tracker-backup-xnlt-lawi0agmp.vercel.app//exercises/:match*"
     }
   ]
 }
