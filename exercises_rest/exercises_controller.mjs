@@ -9,15 +9,8 @@ import * as exercises from './exercises_model.mjs';
 
 const ERROR_NOT_FOUND = {Error: "Not found"};
 const ERROR_INVALID_REQ= {Error: "Invalid Request"}
-const PORT = process.env.PORT;
-import cors from 'cors';
-
-const app = express();
-
-app.use(express.json());
 
 // allow all origins (for dev/demo)
-import express from "express";
 import cors from "cors";
 import exercisesRouter from "./routes/exercises.js"; // your routes
 
@@ -173,6 +166,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
