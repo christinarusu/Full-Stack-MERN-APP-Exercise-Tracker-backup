@@ -7,7 +7,7 @@ export default defineConfig({
 })
 
 // src/api.js or wherever you call your backend
-const BACKEND_URL = 'https://full-stack-mern-app-exercise-tracker-backup-8egnmljtk.vercel.app/';
+const BACKEND_URL = 'https://full-stack-mern-app-exercise-tracker-backup-1ipfe06o7.vercel.app';
 
 export async function getExercises() {
   const response = await fetch(`${BACKEND_URL}/exercises`);
