@@ -17,12 +17,8 @@ import cors from 'cors';
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = [
-  'https://full-stack-mern-app-exercise-tracker-backup-xnlt-fgvgjph3s.vercel.app'
-];
-
 app.use(cors({
-  origin: allowedOrigins,
+  origin: '*',   // allow all origins
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
 }));
@@ -165,6 +161,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
