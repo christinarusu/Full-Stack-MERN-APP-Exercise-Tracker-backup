@@ -14,7 +14,10 @@ import cors from 'cors';
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://full-stack-mern-app-exercise-tracker-backup-xnlt-58hxiwdbs.vercel.app',
+  methods: ['GET','POST','PUT','DELETE'],
+}));
 
 exercises.connect().then(() => console.log("✅ Connected to MongoDB")).catch(console.error);
 
@@ -151,5 +154,6 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
