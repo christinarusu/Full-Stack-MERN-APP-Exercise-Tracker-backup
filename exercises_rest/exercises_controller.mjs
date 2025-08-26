@@ -1,9 +1,6 @@
 /**
 Christina Rusu
  */
-/**
-Christina Rusu
- */
 
 import asyncHandler from 'express-async-handler';
 import * as exercises from './exercises_model.mjs';
@@ -21,8 +18,6 @@ const app = express();
 app.use(cors());  // <-- this allows all origins
 
 app.use(express.json());
-
-const PORT = process.env.PORT || 5000;
 
 /**
  * 
@@ -157,6 +152,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
