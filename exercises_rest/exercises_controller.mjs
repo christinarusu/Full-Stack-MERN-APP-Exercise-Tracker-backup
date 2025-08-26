@@ -12,21 +12,24 @@ import * as exercises from './exercises_model.mjs';
 
 const ERROR_NOT_FOUND = {Error: "Not found"};
 const ERROR_INVALID_REQ= {Error: "Invalid Request"}
-const PORT = process.env.PORT;
+import express from 'express';
 import cors from 'cors';
+import 'dotenv/config';
+import exercisesRouter from './routes/exercises.js';
+
 const app = express();
+
+// Allow requests from any origin (for Vercel frontends or testing)
+app.use(cors());  // <-- this allows all origins
+
 app.use(express.json());
 
-app.use(cors({
-  origin: '*',   // allow all origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
-}));
+// Mount your routes
+app.use('/exercises', exercisesRouter);
 
-// handle preflight requests
-app.options('*', cors());
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-exercises.connect().then(() => console.log("✅ Connected to MongoDB")).catch(console.error);
 
 /**
  * 
@@ -161,6 +164,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
