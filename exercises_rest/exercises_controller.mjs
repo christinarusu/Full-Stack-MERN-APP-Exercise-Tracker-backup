@@ -4,8 +4,7 @@ Christina Rusu
 /**
 Christina Rusu
  */
-import 'dotenv/config';
-import express from 'express';
+
 import asyncHandler from 'express-async-handler';
 import * as exercises from './exercises_model.mjs';
 
@@ -15,7 +14,6 @@ const ERROR_INVALID_REQ= {Error: "Invalid Request"}
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
-import exercisesRouter from './routes/exercises.js';
 
 const app = express();
 
@@ -24,12 +22,7 @@ app.use(cors());  // <-- this allows all origins
 
 app.use(express.json());
 
-// Mount your routes
-app.use('/exercises', exercisesRouter);
-
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 
 /**
  * 
@@ -164,6 +157,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
