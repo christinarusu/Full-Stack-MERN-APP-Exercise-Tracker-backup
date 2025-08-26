@@ -1,8 +1,9 @@
 {
-  "rewrites": [
-    {
-      "source": "/exercises/:match*",
-      "destination": "https://full-stack-mern-app-exercise-tracker-backup-xnlt-fgvgjph3s.vercel.app/exercises/:match*"
-    }
+  "version": 2,
+  "builds": [
+    { "src": "exercises_controller.mjs", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "exercises_controller.mjs" }
   ]
 }
