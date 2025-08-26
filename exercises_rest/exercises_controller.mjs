@@ -17,11 +17,28 @@ const app = express();
 app.use(express.json());
 
 // allow all origins (for dev/demo)
-app.use(cors());
+import express from "express";
+import cors from "cors";
+import exercisesRouter from "./routes/exercises.js"; // your routes
+
+const app = express();
+
+// Dynamic CORS function
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // allow requests like Postman
+    if (origin.includes("vercel.app")) return callback(null, true); // allow Vercel frontends
+    callback(new Error("Not allowed by CORS"));
+  }
+}));
+
 app.use(express.json());
 
+// Routes
+app.use("/exercises", exercisesRouter);
 
-exercises.connect().then(() => console.log("✅ Connected to MongoDB")).catch(console.error);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 /**
  * 
@@ -156,6 +173,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
