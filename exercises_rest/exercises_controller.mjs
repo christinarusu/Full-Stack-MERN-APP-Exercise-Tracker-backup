@@ -19,6 +19,12 @@ app.use(cors());  // <-- this allows all origins
 
 app.use(express.json());
 
+// connect to Mongo
+exercises.connect()
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch(console.error);
+
+
 /**
  * 
  * @param {object} req 
@@ -152,6 +158,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
