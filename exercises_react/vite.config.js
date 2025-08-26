@@ -1,14 +1,16 @@
+// vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  server: {
-    proxy: {
-    '/exercises': {
-      target: 'http://localhost:3000'
-      } 
-    }
-  }
+  plugins: [react()]
 })
+
+// src/api.js or wherever you call your backend
+const BACKEND_URL = 'https://full-stack-mern-app-exercise-tracker-backup-8egnmljtk.vercel.app/';
+
+export async function getExercises() {
+  const response = await fetch(`${BACKEND_URL}/exercises`);
+  if (!response.ok) throw new Error('Failed to fetch exercises');
+  return await response.json();
+}
