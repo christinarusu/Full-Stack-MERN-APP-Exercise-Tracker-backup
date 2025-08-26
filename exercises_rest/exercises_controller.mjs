@@ -13,7 +13,6 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(express.json());
-const app = express();
 
 
 exercises.connect().then(() => console.log("✅ Connected to MongoDB")).catch(console.error);
@@ -151,6 +150,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
