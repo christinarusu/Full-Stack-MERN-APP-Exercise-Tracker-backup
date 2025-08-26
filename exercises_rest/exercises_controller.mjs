@@ -14,10 +14,20 @@ import cors from 'cors';
 const app = express();
 
 app.use(express.json());
+const app = express();
+
+const allowedOrigins = [
+  'https://full-stack-mern-app-exercise-tracker-backup-xnlt-fgvgjph3s.vercel.app'
+];
+
 app.use(cors({
-  origin: 'https://full-stack-mern-app-exercise-tracker-backup-xnlt-58hxiwdbs.vercel.app',
-  methods: ['GET','POST','PUT','DELETE'],
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
 }));
+
+// handle preflight requests
+app.options('*', cors());
 
 exercises.connect().then(() => console.log("✅ Connected to MongoDB")).catch(console.error);
 
@@ -154,6 +164,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
