@@ -13,26 +13,10 @@ import 'dotenv/config';
 
 const app = express();
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // or your specific frontend URL
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  
-  // handle preflight
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-  
-  next();
-});
-
 app.use(express.json());
 
 // connect to Mongo
 exercises.connect()
-  .then(() => console.log("✅ Connected to MongoDB"))
-  .catch(console.error);
-
 
 /**
  * 
@@ -167,6 +151,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
