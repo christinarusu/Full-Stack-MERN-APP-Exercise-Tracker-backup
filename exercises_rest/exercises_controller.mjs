@@ -13,7 +13,7 @@ const app = express();
 // enable CORS for all origins (dev + prod)
         // Allow requests from your Vercel frontend URL
 app.use(cors({
-  origin: 'full-stack-mern-app-exercise-tracker-backup-xnlt-qb7bw067i.vercel.app' // Replace with your actual Vercel URL
+  origin: '*' // Replace with your actual Vercel URL
     }));
 
 // parse JSON
@@ -158,6 +158,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
