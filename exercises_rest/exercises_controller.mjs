@@ -9,13 +9,17 @@ import * as exercises from './exercises_model.mjs';
 const ERROR_NOT_FOUND = {Error: "Not found"};
 const ERROR_INVALID_REQ= {Error: "Invalid Request"}
 import express from 'express';
-import cors from 'cors';
 import 'dotenv/config';
 
 const app = express();
 
-// Allow requests from any origin (for Vercel frontends or testing)
-app.use(cors());  // <-- this allows all origins
+import cors from "cors";
+
+app.use(cors({
+  origin: "*",   // for now, allow all origins
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"]
+}));
 
 app.use(express.json());
 
@@ -158,6 +162,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
