@@ -15,8 +15,6 @@ const app = express();
 
 import cors from "cors";
 
-const app = express();
-
 // CORS setup
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -172,6 +170,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
