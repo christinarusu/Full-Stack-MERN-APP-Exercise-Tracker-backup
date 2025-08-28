@@ -15,11 +15,14 @@ const app = express();
 
 import cors from "cors";
 
-app.use(cors({
-  origin: "*",   // for now, allow all origins
+const corsOptions = {
+  origin: "*",   // allow all for now
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type"]
-}));
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));  // ✅ handle preflight requests
 
 app.use(express.json());
 
@@ -162,6 +165,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
