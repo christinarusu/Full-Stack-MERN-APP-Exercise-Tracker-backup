@@ -3,7 +3,7 @@
 import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import ExerciseTable from '../Components/ExerciseTable';
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = 'https://full-stack-mern-app-exercise-tracker-backup-kcpdxz7jp.vercel.app';
 
 
 
