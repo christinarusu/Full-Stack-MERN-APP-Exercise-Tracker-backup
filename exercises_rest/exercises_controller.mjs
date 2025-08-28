@@ -2,21 +2,25 @@
 Christina Rusu
  */
 
-import asyncHandler from 'express-async-handler';
-import * as exercises from './exercises_model.mjs';
-
-
-const ERROR_NOT_FOUND = {Error: "Not found"};
-const ERROR_INVALID_REQ= {Error: "Invalid Request"}
-import express from 'express';
-import 'dotenv/config';
+import express from "express";
+import cors from "cors";
+import asyncHandler from "express-async-handler";
+import * as exercises from "./exercises_model.mjs";
+import "dotenv/config";
 
 const app = express();
 
+// enable CORS for all origins (dev + prod)
+app.use(cors());
+
+// parse JSON
 app.use(express.json());
 
 // connect to Mongo
 exercises.connect()
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch(console.error);
+
 
 /**
  * 
@@ -151,6 +155,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
