@@ -17,9 +17,10 @@ import cors from "cors";
 
 // CORS setup
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  // Replace with your frontend origin in production
+  res.setHeader('Access-Control-Allow-Origin', 'https://full-stack-mern-app-exercise-tracker-backup-xnlt-eajr7ppvx.vercel.app/');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Add allowed HTTP methods
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Add allowed headers
   next();
 });
 
@@ -170,6 +171,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
