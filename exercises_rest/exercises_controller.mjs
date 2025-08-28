@@ -13,23 +13,19 @@ import 'dotenv/config';
 
 const app = express();
 
-import cors from "cors";
-
-// CORS setup
 app.use((req, res, next) => {
-  // Replace with your frontend origin in production
-  res.setHeader('Access-Control-Allow-Origin', 'https://full-stack-mern-app-exercise-tracke-eta.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Add allowed HTTP methods
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Add allowed headers
+  res.header("Access-Control-Allow-Origin", "*"); // or your specific frontend URL
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  
+  // handle preflight
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  
   next();
 });
 
-// Make sure OPTIONS preflight requests are handled
-app.options("*", (req, res) => {
-  res.sendStatus(200);
-});
-
-app.use(express.json());
 app.use(express.json());
 
 // connect to Mongo
@@ -171,6 +167,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
