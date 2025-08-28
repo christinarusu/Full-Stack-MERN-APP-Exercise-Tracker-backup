@@ -11,7 +11,10 @@ import "dotenv/config";
 const app = express();
 
 // enable CORS for all origins (dev + prod)
-app.use(cors());
+        // Allow requests from your Vercel frontend URL
+app.use(cors({
+  origin: 'full-stack-mern-app-exercise-tracker-backup-xnlt-qb7bw067i.vercel.app' // Replace with your actual Vercel URL
+    }));
 
 // parse JSON
 app.use(express.json());
@@ -155,6 +158,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
