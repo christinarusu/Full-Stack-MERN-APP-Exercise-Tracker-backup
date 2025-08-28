@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()]
 })
 
-// src/api.js or wherever you call your backend
-const BACKEND_URL = 'https://full-stack-mern-app-exercise-tracker-backup-dvfhii6mq.vercel.app';
+// src/api.js
+const BACKEND_URL = import.meta.env.VITE_API_URL;
 
 export async function getExercises() {
   const response = await fetch(`${BACKEND_URL}/exercises`);
