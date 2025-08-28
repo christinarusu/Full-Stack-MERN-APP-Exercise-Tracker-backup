@@ -15,15 +15,22 @@ const app = express();
 
 import cors from "cors";
 
-const corsOptions = {
-  origin: "*",   // allow all for now
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"]
-};
+const app = express();
 
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));  // ✅ handle preflight requests
+// CORS setup
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 
+// Make sure OPTIONS preflight requests are handled
+app.options("*", (req, res) => {
+  res.sendStatus(200);
+});
+
+app.use(express.json());
 app.use(express.json());
 
 // connect to Mongo
@@ -165,6 +172,7 @@ app.delete('/exercises/:id', asyncHandler(async (req, res) => {
 }))
 
 export default app
+
 
 
 
