@@ -7,10 +7,16 @@ export default defineConfig({
 })
 
 // src/api.js
-const BACKEND_URL = 'https://full-stack-mern-app-exercise-tracker-backup-9zgu526cx.vercel.app';
+const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+// Fetch exercises from backend
 export async function getExercises() {
-  const response = await fetch(`${BACKEND_URL}/exercises`);
-  if (!response.ok) throw new Error('Failed to fetch exercises');
-  return await response.json();
+  try {
+    const response = await fetch(`${BACKEND_URL}/exercises`);
+    if (!response.ok) throw new Error("Failed to fetch exercises");
+    return await response.json();
+  } catch (err) {
+    console.error("API error:", err);
+    throw err;
+  }
 }
